@@ -8,10 +8,6 @@
 import Testing
 @testable import RiMo_GftNdx
 
+@Suite("RiMo-Gftndx unit tests")
 struct RiMo_GftNdxTests {
-
-    @Test func example() async throws {
-        // Write your test here and use APIs like `#expect(...)` to check expected conditions.
-    }
-
 }
