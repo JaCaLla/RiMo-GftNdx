@@ -31,7 +31,7 @@ class CharactersListCoordinator: ObservableObject {
        func build(page: CharactersListViews) -> some View {
            switch page {
            case .charactersListView:
-               CharactersView(coordinator: self)
+               CharactersListView(coordinator: self)
            case .detailView (let character):
                DetailView(character: character)
            }

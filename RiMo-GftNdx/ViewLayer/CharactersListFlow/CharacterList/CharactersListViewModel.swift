@@ -10,8 +10,13 @@ import SwiftUI
 @MainActor
 class CharactersListViewModel: ObservableObject {
     @Published var characters: [Character] = []
+    @Published var isFetching = false
+    @Published var searchText: String = ""
     
     func fetch() async {
+        guard !isFetching else { return }
+        isFetching = true
+        defer { isFetching = false }
         switch await appSingletons.dataManager.fetchCharacters() {
         case .success(let characters):
             self.characters = characters

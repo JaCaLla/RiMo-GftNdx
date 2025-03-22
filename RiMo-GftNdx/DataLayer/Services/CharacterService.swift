@@ -9,12 +9,14 @@
 final class CharacterService {
 
     let baseService = BaseService<ResponseJson<CharacterJson>>(param: "character")
+    let page: Int
     
-    init() {
+    init(page: Int) {
+        self.page = page
     }
     
     func fetch() async -> Result<ResponseJson<CharacterJson>, ErrorService> {
-        await baseService.fetch()
+        await baseService.fetch(page: page)
     }
 }
 

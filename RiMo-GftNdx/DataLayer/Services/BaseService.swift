@@ -38,14 +38,14 @@ final class BaseService<T: Decodable> {
     }
     
     // MARK: - APIManagerProtocol
-    func fetch() async -> Result<T, ErrorService> {
+    func fetch(page: Int?) async -> Result<T, ErrorService> {
         if let forcedErrorApi {
             return .failure(forcedErrorApi)
         }
         if let forcedResposeApi {
             return .success(forcedResposeApi)
         }
-        guard let url = createURLFromParameters(parameters: [:], pathparam: getPathParam()) else {
+        guard let url = createURLFromParameters(parameters: [:], pathparam: getPathParam(), page: page) else {
             return .failure(.badFormedURL)
         }
         return await fetchAsync(url: url)
@@ -71,12 +71,17 @@ final class BaseService<T: Decodable> {
         }
     }
     
-    private func createURLFromParameters(parameters: [String: Any], pathparam: String?) -> URL? {
+    private func createURLFromParameters(parameters: [String: Any], pathparam: String?, page: Int?) -> URL? {
 
         var components = URLComponents()
         components.scheme = apiScheme
         components.host = host
         components.path = path
+        if let page {
+            components.queryItems = [
+                URLQueryItem(name: "page", value: "\(page)")
+            ]
+        }
         if let paramPath = pathparam {
             components.path = path + "\(paramPath)"
         }
