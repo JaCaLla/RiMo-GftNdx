@@ -13,7 +13,7 @@ extension RiMo_GftNdxTests {
         var sut: CharacterService!
 
         mutating func setupAsync() async {
-            sut = await CharacterService()
+            sut = await CharacterService(page: 0)
         }
 
         // Look out! This is an integration test for checkin that service is working,

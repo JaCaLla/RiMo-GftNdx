@@ -37,7 +37,7 @@ extension RiMo_GftNdxTests {
         
         @Test mutating func testFetchCharactersWithError() async throws {
             setupAsync()
-            let characterService = await CharacterService()
+            let characterService = await CharacterService(page: 0)
 
             let baseService = await characterService.baseService
             await baseService.setforcedErrorApi(.noDataResponse)
@@ -53,7 +53,7 @@ extension RiMo_GftNdxTests {
         
         @Test mutating func testFetchCharactersMockData() async throws {
             setupAsync()
-            let characterService = await CharacterService()
+            let characterService = await CharacterService(page: 0)
             let responseJson: ResponseJson<CharacterJson> = ResponseJson(info: InfoJson(count: 2), results: [CharacterJson.sample])
             let baseService = await characterService.baseService
             await baseService.setforcedResposeApi(responseJson)

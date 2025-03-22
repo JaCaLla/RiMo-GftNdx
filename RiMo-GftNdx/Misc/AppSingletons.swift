@@ -8,9 +8,12 @@
 @MainActor
 struct AppSingletons {
     var dataManager: DataManager
+    var imageCache: ImageCache
     
-    init(dataManager: DataManager? = nil) {
+    init(dataManager: DataManager? = nil,
+         imageCache: ImageCache? = nil) {
         self.dataManager = dataManager ?? DataManager()
+        self.imageCache = imageCache ?? ImageCache()
     }
 }
 

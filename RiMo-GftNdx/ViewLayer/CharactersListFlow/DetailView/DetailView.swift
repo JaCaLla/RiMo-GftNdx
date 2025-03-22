@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct DetailView: View {
-//    @StateObject var detailViewModel: DetailViewModel = DetailViewModel(character: .sample)
     let character: Character
     var body: some View {
         VStack {
-            AsyncImage(url: URL(string: character.imageUrl))
-                .clipShape(Circle())
+            if let url = URL(string: character.imageUrl) {
+                CachedAsyncImage(url: url)
+                    .clipShape(Circle())
+            }
             Form {
                 Section {
                     LabeledContent("form_name", value: character.name)
@@ -36,6 +37,5 @@ struct DetailView: View {
                 }
             }.background(Color.green)
         }
-
     }
 }
