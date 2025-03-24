@@ -33,12 +33,12 @@ struct CachedAsyncImage: View {
         }
         Task {
             let (data, _) = try await URLSession.shared.data(from: url)
-                        if let downloadedImage = UIImage(data: data) {
-                            await MainActor.run {
-                                appSingletons.imageCache.saveImage(downloadedImage, for: url)
-                                self.image = downloadedImage
-                            }
-                        }
+            if let downloadedImage = UIImage(data: data) {
+                await MainActor.run {
+                    appSingletons.imageCache.saveImage(downloadedImage, for: url)
+                    self.image = downloadedImage
+                }
+            }
         }
     }
 }

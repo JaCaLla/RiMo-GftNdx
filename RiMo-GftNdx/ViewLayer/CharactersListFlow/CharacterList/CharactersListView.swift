@@ -15,45 +15,46 @@ struct CharactersListView: View {
     let coordinator: CharacterViewProtocol
     @StateObject private var viewModel = CharactersListViewModel()
     @State private var scrollPosition: Int?
+    
     var body: some View {
         ZStack {
             VStack {
-                TextField("Buscar por nombre...", text: $viewModel.searchText)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
+                SearchTextView(searchText: $viewModel.searchText)
                 List(viewModel.characters, id: \.imageUrl) { character in
-                    HStack {
-                        Text(character.name)
-                            .font(.headline)
-                        Spacer()
+                    Button(action: {
+                        coordinator.goToDetailCharater(character: character)
+                    }) {
+                        characterView(character)
                     }
                     .onAppear {
                         if character == viewModel.characters.last {
                             fetch()
                         }
                     }
-                    .onTapGesture {
-                        coordinator.goToDetailCharater(character: character)
-                    }
                 }
             }
-
             .navigationTitle("title_characters_list")
+            .font(Typography.body.font)
             .onAppear {
                 fetch()
             }
             if viewModel.isFetching {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(.white)
-                        .frame(width: 120, height: 120)
-                    ProgressView("loading")
-                        .foregroundColor(.white)
-                        .progressViewStyle(CircularProgressViewStyle())
-                }
+                ActivityIndicatorView()
             }
         }
     }
+    
+    private func characterView(_ character: Character) -> some View {
+        HStack {
+            Text(character.name)
+                .font(Typography.body.font)
+            Spacer()
+            Image(systemName: "chevron.right")
+        }
+        .foregroundColor(.primary)
+        
+    }
+    
     
     private func fetch() {
         Task {

@@ -18,7 +18,6 @@ class CharactersListViewModel: ObservableObject {
         $searchText
             .map { text in
                 text.isEmpty ? self.fetchedCharacters : self.fetchedCharacters.filter { $0.name.lowercased().contains(text.lowercased())}
-                
             }
             .assign(to: &$characters)
     }
@@ -32,7 +31,7 @@ class CharactersListViewModel: ObservableObject {
             fetchedCharacters = characters
             self.characters = fetchedCharacters
         case .failure(_): break
-            // TO DO: Handle error situation
+            #warning("TO DO: Handle error situation")
         }
     }
 }
