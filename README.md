@@ -18,9 +18,15 @@ Ricky Morty iOS sample app
 ```bash
 git clone git@github.com:JaCaLla/RiMo-GftNdx.git
 ```
+3. Open folder created
+```bash
+cd RiMo-GftNdx
+```  
 2. Open RiMo-GftNdx.xcodeproj in Xcode.
-
-3. Build and run the app on an iPhone simulator or device.
+```bash
+xed .
+```  
+4. Build and run the app on an iPhone simulator or device.
 
 ## Tech Stack
 - **Swift 6.0**
