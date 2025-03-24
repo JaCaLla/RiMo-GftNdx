@@ -11,7 +11,7 @@ import SwiftUI
 struct RiMo_GftNdxApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
         }
     }
 }
